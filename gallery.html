@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Karl Kümm University</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(59, 130, 246, 0.9)), 
+                        linear-gradient(45deg, #f0f9ff, #dbeafe);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            background: #64748b;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: #475569;
+            transform: translateY(-2px);
+        }
+
+        .gallery-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: #f1f5f9;
+            color: #64748b;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .featured-gallery {
+            margin-bottom: 4rem;
+        }
+
+        .featured-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 2px solid #f59e0b;
+        }
+
+        .featured-banner {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .featured-banner:before {
+            content: "⭐";
+            margin-right: 0.5rem;
+        }
+
+        .featured-content {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .featured-image {
+            height: 400px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-image:hover {
+            transform: scale(1.02);
+        }
+
+        .featured-image::after {
+            content: "🔍 Click to view";
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .featured-image:hover::after {
+            opacity: 1;
+        }
+
+        .featured-info h2 {
+            color: #1e3a8a;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .featured-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .meta-tag {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .featured-description {
+            color: #64748b;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .featured-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1e3a8a;
+            display: block;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .gallery-image {
+            height: 250px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4, #10b981, #f59e0b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover .gallery-image::before {
+            transform: translateX(100%);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(30, 58, 138, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-content {
+            padding: 1.5rem;
+        }
+
+        .gallery-category {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .gallery-title {
+            color: #1e3a8a;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .gallery-description {
+            color: #64748b;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .photo-count {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            margin: 2% auto;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .modal-body {
+            padding: 2rem;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .modal-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .modal-gallery-item {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .virtual-tour {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .tour-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tour-description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .tour-btn {
+            background: #f59e0b;
+            color: white;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .tour-btn:hover {
+            background: #d97706;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .featured-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-filters {
+                justify-content: flex-start;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .modal-content {
+                margin: 5% auto;
+                max-width: 95%;
+            }
+            
+            .featured-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="logo">Karl Kümm University</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="gallery.html" class="active">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Campus Gallery</h1>
+            <p>Explore our beautiful campus, vibrant student life, and memorable moments at Karl Kümm University</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <a href="index.html" class="back-link">← Back to Home</a>
+
+            <!-- Gallery Filters -->
+            <div class="gallery-filters">
+                <button class="filter-btn active" data-category="all">All Photos</button>
+                <button class="filter-btn" data-category="campus">Campus</button>
+                <button class="filter-btn" data-category="students">Student Life</button>
+                <button class="filter-btn" data-category="events">Events</button>
+                <button class="filter-btn" data-category="facilities">Facilities</button>
+                <button class="filter-btn" data-category="graduation">Graduation</button>
+                <button class="filter-btn" data-category="sports">Sports</button>
+            </div>
+
+            <!-- Featured Gallery Item -->
+            <div class="featured-gallery">
+                <div class="featured-item">
+                    <div class="featured-banner">Featured Gallery</div>
+                    <div class="featured-content">
+                        <div class="featured-image" onclick="openModal('campusModal')">🏛️</div>
+                        <div class="featured-info">
+                            <h2>Campus Architecture & Facilities</h2>
+                            <div class="featured-meta">
+                                <span class="meta-tag">Campus</span>
+                                <span class="meta-tag">Architecture</span>
+                                <span class="meta-tag">Modern</span>
+                            </div>
+                            <p class="featured-description">
+                                Discover the stunning architecture and state-of-the-art facilities that make Karl Kümm University 
+                                a world-class institution. From our iconic main building to our cutting-edge research laboratories, 
+                                every corner of our campus is designed to inspire learning and innovation.
+                            </p>
+                            <div class="featured-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">50+</span>
+                                    <span class="stat-label">Buildings</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">200+</span>
+                                    <span class="stat-label">Photos</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">15</span>
+                                    <span class="stat-label">Facilities</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">100+</span>
+                                    <span class="stat-label">Acres</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-item" data-category="students" onclick="openModal('studentLifeModal')">
+                    <div class="gallery-image">👥</div>
+                    <div class="gallery-overlay">🔍 View Gallery</div>
+                    <div class="photo-count">📷 25 Photos</div>
+                    <div class="gallery-content">
+                        <span class="gallery-category">Student Life</span>
+                        <h3 class="gallery-title">Student Activities & Life</h3>
+                        <p class="gallery-description">Vibrant campus life with diverse student activities, clubs, and social events.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="facilities" onclick="openModal('libraryModal')">
+                    <div class="gallery-image">📚</div>
+                    <div class="gallery-overlay">🔍 View Gallery</div>
+                    <div class="photo-count">📷 30 Photos</div>
+                    <div class="gallery-content">
+                        <span class="gallery-category">Facilities</span>
+                        <h3 class="gallery-title">Library & Learning Spaces</h3>
+                        <p class="gallery-description">Modern library facilities with quiet study areas and collaborative learning spaces.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="events" onclick="openModal('eventsModal')">
+                    <div class="gallery-image">🎉</div>
+                    <div class="gallery-overlay">🔍 View Gallery</div>
+                    <div class="photo-count">📷 40 Photos</div>
+                    <div class="gallery-content">
+                        <span class="gallery-category">Events</span>
+                        <h3 class="gallery-title">Campus Events & Celebrations</h3>
+                        <p class="gallery-description">Memorable moments from our annual events, festivals, and celebrations.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="sports" onclick="openModal('sportsModal')">
+                    <div class="gallery-image">⚽</div>
+                    <div class="gallery-overlay">🔍 View Gallery</div>
+                    <div class="photo-count">📷 20 Photos</div>
+                    <div class="gallery-content">
+                        <span class="gallery-category">Sports</span>
+                        <h3 class="gallery-title">Sports & Recreation</h3>
+                        <p class="gallery-description">Athletic facilities and sports activities that keep our students active and healthy.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="graduation" onclick="openModal('graduationModal')">
+                    <div class="gallery-image">🎓</div>
+                    <div class="gallery-overlay">🔍 View Gallery</div>
+                    <div class="photo-count">📷 50 Photos</div>
+                    <div class="gallery-content">
+                        <span class="gallery-category">Graduation</span>
+                        <h3 class="gallery-title">Graduation Ceremonies</h3>
+                        <p class="gallery-description">Celebrating our graduates' achievements and their journey to success.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="facilities" onclick="openModal('labsModal')">
+                    <div class="gallery-image">🔬</div>
+                    <div class="gallery-overlay">🔍 View Gallery</div>
+                    <div class="photo-count">📷 35 Photos</div>
+                    <div class="gallery-content">
+                        <span class="gallery-category">Facilities</span>
+                        <h3 class="gallery-title">Research Laboratories</h3>
+                        <p class="gallery-description">State-of-the-art research facilities supporting cutting-edge scientific discoveries.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="campus" onclick="openModal('dormModal')">
+                    <div class="gallery-image">🏠</div>
+                    <div class="gallery-overlay">🔍 View Gallery</div>
+                    <div class="photo-count">📷 15 Photos</div>
+                    <div class="gallery-content">
+                        <span class="gallery-category">Campus</span>
+                        <h3 class="gallery-title">Student Housing</h3>
+                        <p class="gallery-description">Comfortable and modern dormitory facilities providing a home away from home.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="events" onclick="openModal('cultureModal')">
+                    <div class="gallery-image">🎭</div>
+                    <div class="gallery-overlay">🔍 View Gallery</div>
+                    <div class="photo-count">📷 45 Photos</div>
+                    <div class="gallery-content">
+                        <span class="gallery-category">Cultural</span>
+                        <h3 class="gallery-title">Cultural Festival</h3>
+                        <p class="gallery-description">Annual cultural celebrations showcasing our diverse student community.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="facilities" onclick="openModal('diningModal')">
+                    <div class="gallery-image">🍽️</div>
+                    <div class="gallery-overlay">🔍 View Gallery</div>
+                    <div class="photo-count">📷 18 Photos</div>
+                    <div class="gallery-content">
+                        <span class="gallery-category">Facilities</span>
+                        <h3 class="gallery-title">Dining & Food Services</h3>
+                        <p class="gallery-description">Multiple dining options offering healthy and delicious meals for all students.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Virtual Tour Section -->
+            <div class="virtual-tour">
+                <h2 class="tour-title">🌐 Take a Virtual Campus Tour</h2>
+                <p class="tour-description">Experience our campus from anywhere in the world with our interactive 360° virtual tour</p>
+                <a href="#" class="tour-btn" onclick="startVirtualTour()">Start Virtual Tour</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Modals -->
+    <div id="campusModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Campus Architecture & Facilities</h3>
+                <button class="modal-close" onclick="closeModal('campusModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-gallery-grid">
+                    <div class="modal-gallery-item">🏛️</div>
+                    <div class="modal-gallery-item">🏢</div>
+                    <div class="modal-gallery-item">🌳</div>
+                    <div class="modal-gallery-item">🚶</div>
+                    <div class="modal-gallery-item">🏛️</div>
+                    <div class="modal-gallery-item">🌸</div>
+                    <div class="modal-gallery-item">⛲</div>
+                    <div class="modal-gallery-item">🏫</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="studentLifeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Student Activities & Life</h3>
+                <button class="modal-close" onclick="closeModal('studentLifeModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-gallery-grid">
+                    <div class="modal-gallery-item">👥</div>
+                    <div class="modal-gallery-item">📚</div>
+                    <div class="modal-gallery-item">🎵</div>
+                    <div class="modal-gallery-item">🎨</div>
+                    <div class="modal-gallery-item">🤝</div>
+                    <div class="modal-gallery-item">💻</div>
+                    <div class="modal-gallery-item">🎭</div>
+                    <div class="modal-gallery-item">🎪</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gallery filtering functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const category = btn.getAttribute('data-category');
+                
+                galleryItems.forEach(item => {
+                    if (category === 'all' || item.getAttribute('data-category') === category) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, 100);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Modal functionality
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Virtual tour functionality
+        function startVirtualTour() {
+            alert('🌐 Virtual Tour Starting!\n\nThis would normally launch an interactive 360° campus tour. For now, enjoy exploring our photo galleries!');
+            // In a real implementation, this would launch a virtual tour application
+        }
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.gallery-item, .featured-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Keyboard navigation for modals
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const openModals = document.querySelectorAll('.modal[style*="block"]');
+                openModals.forEach(modal => {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                });
+            }
+        });
+
+        // Dynamic photo count animation
+        function animatePhotoCount() {
+            const photoCounts = document.querySelectorAll('.photo-count');
+            photoCounts.forEach(count => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.animation = 'pulse 2s ease-in-out infinite';
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                observer.observe(count);
+            });
+        }
+
+        // Add pulse animation for photo counts
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            animatePhotoCount();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

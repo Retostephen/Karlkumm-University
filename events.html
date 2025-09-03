@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Karl Kümm University</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(59, 130, 246, 0.9)), 
+                        linear-gradient(45deg, #f0f9ff, #dbeafe);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            background: #64748b;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: #475569;
+            transform: translateY(-2px);
+        }
+
+        .events-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .calendar-view-btn {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .calendar-view-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .event-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: #f1f5f9;
+            color: #64748b;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .featured-event {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 4rem;
+            border: 2px solid #f59e0b;
+        }
+
+        .featured-banner {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .featured-banner:before {
+            content: "⭐";
+            margin-right: 0.5rem;
+        }
+
+        .featured-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .featured-info h2 {
+            color: #1e3a8a;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .featured-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #f8fafc;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .featured-description {
+            color: #64748b;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .featured-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #1e3a8a;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border: 2px solid #1e3a8a;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #1e3a8a;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .featured-sidebar {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .sidebar-title {
+            color: #1e3a8a;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .event-countdown {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .countdown-timer {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .countdown-item {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 1rem 0.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .countdown-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .event-details {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .detail-icon {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+            position: relative;
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .event-date-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            z-index: 2;
+        }
+
+        .event-image {
+            height: 200px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+        }
+
+        .event-content {
+            padding: 2rem;
+        }
+
+        .event-category {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .event-title {
+            color: #1e3a8a;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .event-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .event-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .event-description {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .event-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-small {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-register {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-details {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .btn-details:hover {
+            background: #e2e8f0;
+        }
+
+        .calendar-section {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .calendar-title {
+            color: #1e3a8a;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            max-width: 500px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .calendar-header {
+            text-align: center;
+            font-weight: bold;
+            color: #1e3a8a;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .calendar-day {
+            text-align: center;
+            padding: 0.8rem 0.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .calendar-day:hover {
+            background: #f1f5f9;
+        }
+
+        .calendar-day.has-event {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            color: white;
+            font-weight: bold;
+        }
+
+        .calendar-day.today {
+            background: #f59e0b;
+            color: white;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .featured-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .event-filters {
+                justify-content: flex-start;
+            }
+            
+            .events-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .countdown-timer {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .calendar-grid {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="logo">Karl Kümm University</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="events.html" class="active">Events</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Campus Events</h1>
+            <p>Discover upcoming events, workshops, conferences, and activities at Karl Kümm University</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <a href="index.html" class="back-link">← Back to Home</a>
+            
+            <div class="events-header">
+                <h2 style="color: #1e3a8a; font-size: 2rem;">Upcoming Events</h2>
+                <button class="calendar-view-btn" onclick="toggleCalendarView()">📅 Calendar View</button>
+            </div>
+
+            <!-- Event Filters -->
+            <div class="event-filters">
+                <button class="filter-btn active" data-category="all">All Events</button>
+                <button class="filter-btn" data-category="academic">Academic</button>
+                <button class="filter-btn" data-category="cultural">Cultural</button>
+                <button class="filter-btn" data-category="sports">Sports</button>
+                <button class="filter-btn" data-category="workshop">Workshops</button>
+                <button class="filter-btn" data-category="conference">Conferences</button>
+            </div>
+
+            <!-- Featured Event -->
+            <div class="featured-event">
+                <div class="featured-banner">Featured Event</div>
+                <div class="featured-content">
+                    <div class="featured-info">
+                        <h2>Open House Day 2024</h2>
+                        <div class="featured-meta">
+                            <div class="meta-item">
+                                <span>📅</span>
+                                <span>April 15, 2024</span>
+                            </div>
+                            <div class="meta-item">
+                                <span>⏰</span>
+                                <span>9:00 AM - 4:00 PM</span>
+                            </div>
+                            <div class="meta-item">
+                                <span>📍</span>
+                                <span>Main Campus</span>
+                            </div>
+                            <div class="meta-item">
+                                <span>🎫</span>
+                                <span>Free Entry</span>
+                            </div>
+                        </div>
+                        <p class="featured-description">
+                            Join us for our biggest event of the year! Explore our beautiful campus, meet faculty members, 
+                            attend information sessions about our programs, enjoy student performances, and discover why 
+                            Karl Kümm University is the perfect place for your educational journey. Campus tours every 30 minutes.
+                        </p>
+                        <div class="featured-actions">
+                            <a href="#" class="btn-primary">Register Now</a>
+                            <a href="#" class="btn-secondary">View Program</a>
+                        </div>
+                    </div>
+                    
+                    <div class="featured-sidebar">
+                        <h3 class="sidebar-title">⏰ Event Countdown</h3>
+                        <div class="event-countdown">
+                            <div class="countdown-timer" id="countdown">
+                                <div class="countdown-item">
+                                    <span class="countdown-number" id="days">--</span>
+                                    <span class="countdown-label">Days</span>
+                                </div>
+                                <div class="countdown-item">
+                                    <span class="countdown-number" id="hours">--</span>
+                                    <span class="countdown-label">Hours</span>
+                                </div>
+                                <div class="countdown-item">
+                                    <span class="countdown-number" id="minutes">--</span>
+                                    <span class="countdown-label">Minutes</span>
+                                </div>
+                                <div class="countdown-item">
+                                    <span class="countdown-number" id="seconds">--</span>
+                                    <span class="countdown-label">Seconds</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="event-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">👥</div>
+                                <div>
+                                    <strong>Expected Attendees</strong><br>
+                                    <span style="color: #64748b;">2,000+ visitors</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">🏢</div>
+                                <div>
+                                    <strong>Campus Tours</strong><br>
+                                    <span style="color: #64748b;">Every 30 minutes</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">🎓</div>
+                                <div>
+                                    <strong>Program Sessions</strong><br>
+                                    <span style="color: #64748b;">All faculties represented</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Events Grid -->
+            <div class="events-grid" id="eventsGrid">
+                <div class="event-card" data-category="conference">
+                    <div class="event-date-badge">Apr 22</div>
+                    <div class="event-image">🔬</div>
+                    <div class="event-content">
+                        <span class="event-category">Conference</span>
+                        <h3 class="event-title">International Research Conference on AI & Healthcare</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">
+                                <span>📅</span>
+                                <span>April 22-24, 2024</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <span>📍</span>
+                                <span>University Auditorium</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <span>👥</span>
+                                <span>500+ Attendees Expected</span>
+                            </div>
+                        </div>
+                        <p class="event-description">
+                            Leading researchers and industry experts will present cutting-edge developments in AI applications for healthcare...
+                        </p>
+                        <div class="event-actions">
+                            <a href="#" class="btn-small btn-register">Register</a>
+                            <a href="#" class="btn-small btn-details">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card" data-category="cultural">
+                    <div class="event-date-badge">May 01</div>
+                    <div class="event-image">🎭</div>
+                    <div class="event-content">
+                        <span class="event-category">Cultural</span>
+                        <h3 class="event-title">Annual Cultural Festival</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">
+                                <span>📅</span>
+                                <span>May 1-3, 2024</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <span>📍</span>
+                                <span>Student Center Plaza</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <span>🎫</span>
+                                <span>Free Entry</span>
+                            </div>
+                        </div>
+                        <p class="event-description">
+                            Celebrate diversity with performances, food, art exhibitions, and cultural displays from over 50 countries...
+                        </p>
+                        <div class="event-actions">
+                            <a href="#" class="btn-small btn-register">Participate</a>
+                            <a href="#" class="btn-small btn-details">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card" data-category="academic">
+                    <div class="event-date-badge">May 10</div>
+                    <div class="event-image">🎓</div>
+                    <div class="event-content">
+                        <span class="event-category">Academic</span>
+                        <h3 class="event-title">Graduation Ceremony 2024</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">
+                                <span>📅</span>
+                                <span>May 10, 2024</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <span>📍</span>
+                                <span>University Stadium</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <span>👥</span>
+                                <span>3,000+ Graduates</span>
+                            </div>
+                        </div>
+                        <p class="event-description">
+                            Celebrate the achievements of our graduating class of 2024. Family and friends welcome to join this momentous occasion...
+                        </p>
+                        <div class="event-actions">
+                            <a href="#" class="btn-small btn-register">RSVP</a>
+                            <a href="#" class="btn-small btn-details">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card" data-category="sports">
+                    <div class="event-date-badge">May 15</div>
+                    <div class="event-image">⚽</div>
+                    <div class="event-content">
+                        <span class="event-category">Sports</span>
+                        <h3 class="event-title">Inter-Faculty Sports Championship</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">
+                                <span>📅</span>
+                                <span>May 15-20, 2024</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <span>📍</span>
+                                <span>Sports Complex</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <span>🏆</span>
+                                <span>8 Sports Categories</span>
+                            </div>
+                        </div>
+                        <p class="event-description">
+                            Annual sports competition featuring football, basketball, volleyball, athletics, and more. Come cheer for your faculty...
+                        </p>
+                        <div class="event-actions">
+                            <a href="#" class="btn-small btn-register">Register Team</a>
+                            <a href="#" class="btn-small btn-details">Schedule</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card" data-category="workshop">
+                    <div class="event-date-badge">May 25</div>
+                    <div class="event-image">💼</div>
+                    <div class="event-content">
+                        <span class="event-category">Workshop</span>
+                        <h3 class="event-title">Career Development Workshop</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">
+                                <span>📅</span>
+                                <span>May 25-26, 2024</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <span>📍</span>
+                                <span>Conference Hall A</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <span>💰</span>
+                                <span>₦5,000</span>
+                            </div>
+                        </div>
+                        <p class="event-description">
+                            Professional development sessions covering resume writing, interview skills, networking, and job search strategies...
+                        </p>
+                        <div class="event-actions">
+                            <a href="#" class="btn-small btn-register">Register</a>
+                            <a href="#" class="btn-small btn-details">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card" data-category="academic">
+                    <div class="event-date-badge">Jun 05</div>
+                    <div class="event-image">📚</div>
+                    <div class="event-content">
+                        <span class="event-category">Academic</span>
+                        <h3 class="event-title">Research Showcase & Innovation Fair</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">
+                                <span>📅</span>
+                                <span>June 5-7, 2024</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <span>📍</span>
+                                <span>Exhibition Center</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <span>🔬</span>
+                                <span>100+ Projects</span>
+                            </div>
+                        </div>
+                        <p class="event-description">
+                            Students and faculty present innovative research projects, startups pitch their ideas, and industry partners explore collaborations...
+                        </p>
+                        <div class="event-actions">
+                            <a href="#" class="btn-small btn-register">Submit Project</a>
+                            <a href="#" class="btn-small btn-details">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar Section -->
+            <div class="calendar-section" id="calendarSection" style="display: none;">
+                <h2 class="calendar-title">📅 Events Calendar</h2>
+                <p style="color: #64748b; margin-bottom: 2rem;">Click on highlighted dates to see events</p>
+                
+                <div class="calendar-grid">
+                    <div class="calendar-header">Sun</div>
+                    <div class="calendar-header">Mon</div>
+                    <div class="calendar-header">Tue</div>
+                    <div class="calendar-header">Wed</div>
+                    <div class="calendar-header">Thu</div>
+                    <div class="calendar-header">Fri</div>
+                    <div class="calendar-header">Sat</div>
+                    
+                    <!-- Calendar days will be generated by JavaScript -->
+                    <div class="calendar-day">1</div>
+                    <div class="calendar-day">2</div>
+                    <div class="calendar-day">3</div>
+                    <div class="calendar-day">4</div>
+                    <div class="calendar-day">5</div>
+                    <div class="calendar-day">6</div>
+                    <div class="calendar-day">7</div>
+                    <div class="calendar-day">8</div>
+                    <div class="calendar-day">9</div>
+                    <div class="calendar-day">10</div>
+                    <div class="calendar-day">11</div>
+                    <div class="calendar-day">12</div>
+                    <div class="calendar-day">13</div>
+                    <div class="calendar-day">14</div>
+                    <div class="calendar-day has-event">15</div>
+                    <div class="calendar-day">16</div>
+                    <div class="calendar-day">17</div>
+                    <div class="calendar-day">18</div>
+                    <div class="calendar-day">19</div>
+                    <div class="calendar-day">20</div>
+                    <div class="calendar-day">21</div>
+                    <div class="calendar-day has-event">22</div>
+                    <div class="calendar-day">23</div>
+                    <div class="calendar-day">24</div>
+                    <div class="calendar-day">25</div>
+                    <div class="calendar-day">26</div>
+                    <div class="calendar-day">27</div>
+                    <div class="calendar-day">28</div>
+                    <div class="calendar-day">29</div>
+                    <div class="calendar-day">30</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Event filtering functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const eventCards = document.querySelectorAll('.event-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const category = btn.getAttribute('data-category');
+                
+                eventCards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 100);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Countdown timer for featured event
+        function updateCountdown() {
+            const eventDate = new Date('2024-04-15T09:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = '<div style="color: #ef4444; font-size: 1.2rem; font-weight: bold;">Event Started!</div>';
+            }
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Calendar view toggle
+        function toggleCalendarView() {
+            const calendarSection = document.getElementById('calendarSection');
+            const eventsGrid = document.getElementById('eventsGrid');
+            const btn = document.querySelector('.calendar-view-btn');
+            
+            if (calendarSection.style.display === 'none' || !calendarSection.style.display) {
+                calendarSection.style.display = 'block';
+                eventsGrid.style.display = 'none';
+                btn.textContent = '📋 List View';
+            } else {
+                calendarSection.style.display = 'none';
+                eventsGrid.style.display = 'grid';
+                btn.textContent = '📅 Calendar View';
+            }
+        }
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.event-card, .featured-event').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Calendar day click events
+        document.querySelectorAll('.calendar-day.has-event').forEach(day => {
+            day.addEventListener('click', () => {
+                alert(`Events on ${day.textContent}: \n- Open House Day\n- Research Conference\n- Cultural Festival`);
+            });
+        });
+
+        // Mark today in calendar
+        const today = new Date().getDate();
+        document.querySelectorAll('.calendar-day').forEach(day => {
+            if (parseInt(day.textContent) === today) {
+                day.classList.add('today');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admissions - Karl Kümm University</title>
+    <link rel="icon" type="jpg" href="KKU Logo.jpeg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('admission.jpg');
+            background-size: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+
+
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-alt {
+            background: #f8fafc;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .card p {
+            color: #64748b;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.4);
+        }
+
+        .btn-large {
+            padding: 1.5rem 3rem;
+            font-size: 1.3rem;
+            margin: 2rem auto;
+            display: block;
+            max-width: 300px;
+        }
+
+        /* Requirements Section */
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .requirement-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #3b82f6;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .requirement-item h4 {
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .requirement-item ul {
+            color: #64748b;
+            padding-left: 1rem;
+        }
+
+        .requirement-item ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            padding: 1rem 2rem;
+            position: relative;
+            background: inherit;
+            width: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background: #f59e0b;
+            border-radius: 50%;
+            top: 1.5rem;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #3b82f6;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .timeline-content h4 {
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-date {
+            color: #f59e0b;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Application Form */
+        .application-form {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .required {
+            color: #ef4444;
+        }
+
+        /* Progress Indicator */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 2rem 0;
+            display: none;
+        }
+
+        .success-message h3 {
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 4rem;
+                padding-right: 1rem;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0%;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">Karl Kümm University</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="admissions.html" class="active">Admissions</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Join Karl Kümm University</h1>
+            <p>Begin your journey of Knowledge, Character & Service. Apply now for the upcoming academic session.</p>
+            <a href="#apply-now" class="btn btn-primary btn-large">Apply Now</a>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Karl Kümm University?</h2>
+                <p>Experience world-class education with a focus on character development and community service</p>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">🎓</div>
+                    <h3>Academic Excellence</h3>
+                    <p>Top-ranked programs with experienced faculty and cutting-edge curriculum designed for the modern world.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💰</div>
+                    <h3>Affordable Education</h3>
+                    <p>Quality education at affordable rates with numerous scholarship opportunities and flexible payment plans.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🌍</div>
+                    <h3>Global Opportunities</h3>
+                    <p>International partnerships, exchange programs, and global networking opportunities for all students.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏢</div>
+                    <h3>Career Support</h3>
+                    <p>Dedicated career services, internship programs, and strong industry connections ensuring graduate employment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2>Available Programs</h2>
+                <p>Choose from our diverse range of undergraduate and graduate programs</p>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Undergraduate Programs</h3>
+                    <ul style="text-align: left; color: #64748b;">
+                        <li>Bachelor of Science in Computer Science</li>
+                        <li>Bachelor of Engineering (Various Disciplines)</li>
+                        <li>Bachelor of Business Administration</li>
+                        <li>Bachelor of Arts in Mass Communication</li>
+                        <li>Bachelor of Science in Nursing</li>
+                        <li>Bachelor of Education</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Graduate Programs</h3>
+                    <ul style="text-align: left; color: #64748b;">
+                        <li>Master of Business Administration (MBA)</li>
+                        <li>Master of Science in Information Technology</li>
+                        <li>Master of Engineering</li>
+                        <li>Master of Public Health</li>
+                        <li>Master of Education</li>
+                        <li>PhD Programs (Various Disciplines)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Professional Programs</h3>
+                    <ul style="text-align: left; color: #64748b;">
+                        <li>Certificate in Digital Marketing</li>
+                        <li>Diploma in Project Management</li>
+                        <li>Certificate in Data Analytics</li>
+                        <li>Professional Development Courses</li>
+                        <li>Executive Education Programs</li>
+                        <li>Continuing Education</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admission Requirements -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Admission Requirements</h2>
+                <p>Review the requirements for your desired program level</p>
+            </div>
+            <div class="requirements-grid">
+                <div class="requirement-item">
+                    <h4>Undergraduate Requirements</h4>
+                    <ul>
+                        <li>WAEC/NECO certificate with 5 credits including English & Math</li>
+                        <li>JAMB UTME score (minimum 180)</li>
+                        <li>Post-UTME screening test</li>
+                        <li>Birth certificate or age declaration</li>
+                        <li>State of origin certificate</li>
+                        <li>Passport photographs</li>
+                    </ul>
+                </div>
+                <div class="requirement-item">
+                    <h4>Graduate Requirements</h4>
+                    <ul>
+                        <li>Bachelor's degree from recognized university</li>
+                        <li>Minimum CGPA of 2.50 (or equivalent)</li>
+                        <li>Academic transcripts</li>
+                        <li>Two academic references</li>
+                        <li>Research proposal (for PhD applicants)</li>
+                        <li>English proficiency test (for international students)</li>
+                    </ul>
+                </div>
+                <div class="requirement-item">
+                    <h4>International Students</h4>
+                    <ul>
+                        <li>Equivalent of Nigerian secondary school certificate</li>
+                        <li>TOEFL/IELTS scores for English proficiency</li>
+                        <li>Valid passport and visa</li>
+                        <li>Medical certificate</li>
+                        <li>Financial proof/sponsorship letter</li>
+                        <li>Police clearance certificate</li>
+                    </ul>
+                </div>
+                <div class="requirement-item">
+                    <h4>Direct Entry</h4>
+                    <ul>
+                        <li>A-Level, IJMB, or equivalent qualification</li>
+                        <li>Minimum of two A-Level passes</li>
+                        <li>WAEC/NECO certificate</li>
+                        <li>JAMB Direct Entry form</li>
+                        <li>University screening test</li>
+                        <li>All required documentation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Timeline -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2>2024/2025 Application Timeline</h2>
+                <p>Important dates for the upcoming admission cycle</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">March 1, 2024</div>
+                        <h4>Application Opens</h4>
+                        <p>Online application portal goes live for all programs</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">May 15, 2024</div>
+                        <h4>JAMB Registration</h4>
+                        <p>JAMB UTME registration period for new students</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">June 30, 2024</div>
+                        <h4>Application Deadline</h4>
+                        <p>Final date for submission of all applications</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">August 15, 2024</div>
+                        <h4>Screening/Interviews</h4>
+                        <p>Post-UTME screening and interview sessions</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">September 30, 2024</div>
+                        <h4>Admission List</h4>
+                        <p>First batch admission list released</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">October 15, 2024</div>
+                        <h4>Registration</h4>
+                        <p>New students registration and orientation begins</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Online Application Form -->
+    <section class="section" id="apply-now">
+        <div class="container">
+            <div class="section-header">
+                <h2>Apply Online Now</h2>
+                <p>Complete your application in minutes. All fields marked with * are required.</p>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="application-form">
+                <!-- SUCCESS MESSAGE (Hidden initially) -->
+                <div class="success-message" id="successMessage">
+                    <h3>🎉 Application Submitted Successfully!</h3>
+                    <p>Thank you for applying to Karl Kümm University. You will receive a confirmation email shortly with your application reference number.</p>
+                    <p><strong>Next Steps:</strong> Check your email for further instructions and keep your reference number safe.</p>
+                </div>
+
+                <!-- APPLICATION FORM -->
+                <form id="applicationForm" action="https://formspree.io/f/myzdnede" method="POST">
+                    <h3 style="color: #1e3a8a; margin-bottom: 2rem; text-align: center;">Karl Kümm University Application Form</h3>
+                    
+                    <!-- STEP 1: Personal Information -->
+                    <div class="form-step" id="step1">
+                        <h4 style="color: #3b82f6; margin-bottom: 1.5rem; text-align: center;">Step 1: Personal Information</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="firstName">First Name <span class="required">*</span></label>
+                                <input type="text" id="firstName" name="first_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name <span class="required">*</span></label>
+                                <input type="text" id="lastName" name="last_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="middleName">Middle Name</label>
+                                <input type="text" id="middleName" name="middle_name">
+                            </div>
+                            <div class="form-group">
+                                <label for="dateOfBirth">Date of Birth <span class="required">*</span></label>
+                                <input type="date" id="dateOfBirth" name="date_of_birth" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender <span class="required">*</span></label>
+                                <select id="gender" name="gender" required>
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="nationality">Nationality <span class="required">*</span></label>
+                                <select id="nationality" name="nationality" required>
+                                    <option value="">Select Nationality</option>
+                                    <option value="nigerian">Nigerian</option>
+                                    <option value="other">Other (International)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary" onclick="nextStep()">Next Step →</button>
+                    </div>
+
+                    <!-- STEP 2: Contact Information -->
+                    <div class="form-step" id="step2" style="display: none;">
+                        <h4 style="color: #3b82f6; margin-bottom: 1.5rem; text-align: center;">Step 2: Contact Information</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="email">Email Address <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number <span class="required">*</span></label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Home Address <span class="required">*</span></label>
+                                <textarea id="address" name="address" rows="3" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State of Origin <span class="required">*</span></label>
+                                <select id="state" name="state" required>
+                                    <option value="">Select State</option>
+                                    <option value="abia">Abia</option>
+                                    <option value="adamawa">Adamawa</option>
+                                    <option value="akwa-ibom">Akwa Ibom</option>
+                                    <option value="anambra">Anambra</option>
+                                    <option value="bauchi">Bauchi</option>
+                                    <option value="bayelsa">Bayelsa</option>
+                                    <option value="benue">Benue</option>
+                                    <option value="borno">Borno</option>
+                                    <option value="cross-river">Cross River</option>
+                                    <option value="delta">Delta</option>
+                                    <option value="ebonyi">Ebonyi</option>
+                                    <option value="edo">Edo</option>
+                                    <option value="ekiti">Ekiti</option>
+                                    <option value="enugu">Enugu</option>
+                                    <option value="fct">FCT</option>
+                                    <option value="gombe">Gombe</option>
+                                    <option value="imo">Imo</option>
+                                    <option value="jigawa">Jigawa</option>
+                                    <option value="kaduna">Kaduna</option>
+                                    <option value="kano">Kano</option>
+                                    <option value="katsina">Katsina</option>
+                                    <option value="kebbi">Kebbi</option>
+                                    <option value="kogi">Kogi</option>
+                                    <option value="kwara">Kwara</option>
+                                    <option value="lagos">Lagos</option>
+                                    <option value="nasarawa">Nasarawa</option>
+                                    <option value="niger">Niger</option>
+                                    <option value="ogun">Ogun</option>
+                                    <option value="ondo">Ondo</option>
+                                    <option value="osun">Osun</option>
+                                    <option value="oyo">Oyo</option>
+                                    <option value="plateau">Plateau</option>
+                                    <option value="rivers">Rivers</option>
+                                    <option value="sokoto">Sokoto</option>
+                                    <option value="taraba">Taraba</option>
+                                    <option value="yobe">Yobe</option>
+                                    <option value="zamfara">Zamfara</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="lga">Local Government Area <span class="required">*</span></label>
+                                <input type="text" id="lga" name="lga" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="emergencyContact">Emergency Contact Name <span class="required">*</span></label>
+                                <input type="text" id="emergencyContact" name="emergency_contact" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="emergencyPhone">Emergency Contact Phone <span class="required">*</span></label>
+                                <input type="tel" id="emergencyPhone" name="emergency_phone" required>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 1rem; justify-content: center;">
+                            <button type="button" class="btn btn-secondary" onclick="previousStep()">← Previous</button>
+                            <button type="button" class="btn btn-secondary" onclick="nextStep()">Next Step →</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: Academic Information -->
+                    <div class="form-step" id="step3" style="display: none;">
+                        <h4 style="color: #3b82f6; margin-bottom: 1.5rem; text-align: center;">Step 3: Academic Information</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="programLevel">Program Level <span class="required">*</span></label>
+                                <select id="programLevel" name="program_level" required onchange="updatePrograms()">
+                                    <option value="">Select Program Level</option>
+                                    <option value="undergraduate">Undergraduate</option>
+                                    <option value="graduate">Graduate (Masters)</option>
+                                    <option value="phd">PhD</option>
+                                    <option value="diploma">Diploma/Certificate</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="desiredProgram">Desired Program <span class="required">*</span></label>
+                                <select id="desiredProgram" name="desired_program" required>
+                                    <option value="">Select Program Level First</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="entryMode">Entry Mode <span class="required">*</span></label>
+                                <select id="entryMode" name="entry_mode" required>
+                                    <option value="">Select Entry Mode</option>
+                                    <option value="utme">UTME</option>
+                                    <option value="direct_entry">Direct Entry</option>
+                                    <option value="transfer">Transfer</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="jambRegNumber">JAMB Registration Number</label>
+                                <input type="text" id="jambRegNumber" name="jamb_reg_number" placeholder="e.g., 12345678AB">
+                            </div>
+                            <div class="form-group">
+                                <label for="jambScore">JAMB Score</label>
+                                <input type="number" id="jambScore" name="jamb_score" min="0" max="400">
+                            </div>
+                            <div class="form-group">
+                                <label for="previousSchool">Previous School/Institution <span class="required">*</span></label>
+                                <input type="text" id="previousSchool" name="previous_school" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="graduationYear">Year of Graduation <span class="required">*</span></label>
+                                <input type="number" id="graduationYear" name="graduation_year" min="1980" max="2024" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cgpa">CGPA/Grade (if applicable)</label>
+                                <input type="text" id="cgpa" name="cgpa" placeholder="e.g., 3.5/4.0 or First Class">
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 1rem; justify-content: center;">
+                            <button type="button" class="btn btn-secondary" onclick="previousStep()">← Previous</button>
+                            <button type="button" class="btn btn-secondary" onclick="nextStep()">Next Step →</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: Additional Information -->
+                    <div class="form-step" id="step4" style="display: none;">
+                        <h4 style="color: #3b82f6; margin-bottom: 1.5rem; text-align: center;">Step 4: Additional Information</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="hearAboutUs">How did you hear about us? <span class="required">*</span></label>
+                                <select id="hearAboutUs" name="hear_about_us" required>
+                                    <option value="">Select Option</option>
+                                    <option value="website">University Website</option>
+                                    <option value="social_media">Social Media</option>
+                                    <option value="friend_family">Friend/Family</option>
+                                    <option value="school_counselor">School Counselor</option>
+                                    <option value="advertisement">Advertisement</option>
+                                    <option value="education_fair">Education Fair</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="scholarshipInterest">Interested in Scholarships?</label>
+                                <select id="scholarshipInterest" name="scholarship_interest">
+                                    <option value="yes">Yes, please send information</option>
+                                    <option value="no">No, not at this time</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="accommodationNeeded">Do you need accommodation?</label>
+                                <select id="accommodationNeeded" name="accommodation_needed">
+                                    <option value="yes">Yes, on-campus housing</option>
+                                    <option value="no">No, I have arrangements</option>
+                                    <option value="maybe">Maybe, send information</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="specialNeeds">Any Special Needs or Disabilities?</label>
+                                <textarea id="specialNeeds" name="special_needs" rows="3" placeholder="Please describe any accommodations you may need..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="extracurricular">Extracurricular Activities/Interests</label>
+                                <textarea id="extracurricular" name="extracurricular" rows="3" placeholder="Sports, clubs, volunteer work, hobbies, etc."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="careerGoals">Career Goals/Aspirations</label>
+                                <textarea id="careerGoals" name="career_goals" rows="3" placeholder="What do you hope to achieve after graduation?"></textarea>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 1rem; justify-content: center;">
+                            <button type="button" class="btn btn-secondary" onclick="previousStep()">← Previous</button>
+                            <button type="button" class="btn btn-secondary" onclick="nextStep()">Review & Submit →</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 5: Review and Submit -->
+                    <div class="form-step" id="step5" style="display: none;">
+                        <h4 style="color: #3b82f6; margin-bottom: 1.5rem; text-align: center;">Step 5: Review & Submit Application</h4>
+                        
+                        <div style="background: #f8fafc; padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
+                            <h5 style="color: #1e3a8a; margin-bottom: 1rem;">Application Summary</h5>
+                            <div id="applicationSummary"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" id="agreeTerms" name="agree_terms" required>
+                                <span>I agree to the <a href="#" style="color: #3b82f6;">Terms and Conditions</a> and confirm that all information provided is accurate <span class="required">*</span></span>
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" id="agreePrivacy" name="agree_privacy" required>
+                                <span>I agree to the <a href="#" style="color: #3b82f6;">Privacy Policy</a> and consent to processing of my personal data <span class="required">*</span></span>
+                            </label>
+                        </div>
+
+                        <div style="background: #dbeafe; padding: 1.5rem; border-radius: 10px; margin: 2rem 0;">
+                            <h6 style="color: #1e3a8a; margin-bottom: 0.5rem;">📋 Next Steps After Submission:</h6>
+                            <ul style="color: #1e40af; padding-left: 1rem;">
+                                <li>You'll receive a confirmation email with your application reference number</li>
+                                <li>Application fee payment instructions will be sent to your email</li>
+                                <li>Required documents can be uploaded through the student portal</li>
+                                <li>Screening/interview dates will be communicated via email and SMS</li>
+                                <li>Check your application status anytime on our website</li>
+                            </ul>
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; justify-content: center;">
+                            <button type="button" class="btn btn-secondary" onclick="previousStep()">← Previous</button>
+                            <button type="submit" class="btn btn-primary btn-large" id="submitBtn">
+                                <span id="submitText">🚀 Submit Application</span>
+                                <span id="submitLoading" style="display: none;">⏳ Submitting...</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Hidden fields for tracking -->
+                    <input type="hidden" name="_subject" value="New Application - Karl Kümm University">
+                    <input type="hidden" name="_next" value="thank-you.html">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="application_date" id="applicationDate">
+                    <input type="hidden" name="application_id" id="applicationId">
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 5;
+
+        // Program options based on level
+        const programOptions = {
+            undergraduate: [
+                'Computer Science',
+                'Information Technology',
+                'Software Engineering',
+                'Electrical Engineering',
+                'Mechanical Engineering',
+                'Civil Engineering',
+                'Business Administration',
+                'Accounting',
+                'Economics',
+                'Mass Communication',
+                'English Language',
+                'Mathematics',
+                'Physics',
+                'Chemistry',
+                'Biology',
+                'Nursing',
+                'Medicine',
+                'Law',
+                'Education'
+            ],
+            graduate: [
+                'MBA (Master of Business Administration)',
+                'MSc Computer Science',
+                'MSc Information Technology',
+                'MEng Engineering',
+                'MSc Public Health',
+                'MA Mass Communication',
+                'MEd Education',
+                'MSc Economics',
+                'MSc Mathematics',
+                'MSc Physics'
+            ],
+            phd: [
+                'PhD Computer Science',
+                'PhD Engineering',
+                'PhD Business Administration',
+                'PhD Education',
+                'PhD Economics',
+                'PhD Mathematics',
+                'PhD Physics',
+                'PhD English Language'
+            ],
+            diploma: [
+                'Diploma in Computer Applications',
+                'Certificate in Digital Marketing',
+                'Diploma in Project Management',
+                'Certificate in Data Analytics',
+                'Diploma in Graphic Design',
+                'Certificate in Web Development'
+            ]
+        };
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = (currentStep / totalSteps) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        // Show specific step
+        function showStep(stepNumber) {
+            // Hide all steps
+            for (let i = 1; i <= totalSteps; i++) {
+                document.getElementById(`step${i}`).style.display = 'none';
+            }
+            // Show current step
+            document.getElementById(`step${stepNumber}`).style.display = 'block';
+            currentStep = stepNumber;
+            updateProgress();
+        }
+
+        // Next step function
+        function nextStep() {
+            if (validateCurrentStep()) {
+                if (currentStep === 4) {
+                    generateApplicationSummary();
+                }
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
+        // Previous step function
+        function previousStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        // Validate current step
+        function validateCurrentStep() {
+            const currentStepElement = document.getElementById(`step${currentStep}`);
+            const requiredFields = currentStepElement.querySelectorAll('input[required], select[required], textarea[required]');
+            
+            let isValid = true;
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.style.borderColor = '#ef4444';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = '#e2e8f0';
+                }
+            });
+
+            if (!isValid) {
+                alert('Please fill in all required fields before proceeding.');
+            }
+
+            return isValid;
+        }
+
+        // Update program options based on level
+        function updatePrograms() {
+            const level = document.getElementById('programLevel').value;
+            const programSelect = document.getElementById('desiredProgram');
+            
+            programSelect.innerHTML = '<option value="">Select Program</option>';
+            
+            if (level && programOptions[level]) {
+                programOptions[level].forEach(program => {
+                    const option = document.createElement('option');
+                    option.value = program;
+                    option.textContent = program;
+                    programSelect.appendChild(option);
+                });
+            }
+        }
+
+        // Generate application summary
+        function generateApplicationSummary() {
+            const form = document.getElementById('applicationForm');
+            const formData = new FormData(form);
+            
+            let summary = `
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                    <div><strong>Name:</strong> ${formData.get('first_name')} ${formData.get('middle_name')} ${formData.get('last_name')}</div>
+                    <div><strong>Email:</strong> ${formData.get('email')}</div>
+                    <div><strong>Phone:</strong> ${formData.get('phone')}</div>
+                    <div><strong>Program:</strong> ${formData.get('desired_program')}</div>
+                    <div><strong>Level:</strong> ${formData.get('program_level')}</div>
+                    <div><strong>Entry Mode:</strong> ${formData.get('entry_mode')}</div>
+                    <div><strong>State:</strong> ${formData.get('state')}</div>
+                    <div><strong>Previous School:</strong> ${formData.get('previous_school')}</div>
+                </div>
+            `;
+            
+            document.getElementById('applicationSummary').innerHTML = summary;
+        }
+
+        // Form submission handling
+        document.getElementById('applicationForm').addEventListener('submit', function(e) {
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const submitLoading = document.getElementById('submitLoading');
+
+            // Generate application ID and date
+            const applicationId = 'KKU' + Date.now();
+            const applicationDate = new Date().toISOString();
+            
+            document.getElementById('applicationId').value = applicationId;
+            document.getElementById('applicationDate').value = applicationDate;
+
+            // Show loading state
+            submitBtn.disabled = true;
+            submitText.style.display = 'none';
+            submitLoading.style.display = 'inline';
+
+            // Store application locally (backup)
+            const formData = new FormData(e.target);
+            const applicationData = Object.fromEntries(formData.entries());
+            applicationData.applicationId = applicationId;
+            applicationData.submissionDate = applicationDate;
+            
+            localStorage.setItem('application_' + applicationId, JSON.stringify(applicationData));
+
+            // Let form submit naturally to Formspree
+            // On success, show success message and hide form
+            setTimeout(() => {
+                document.getElementById('applicationForm').style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+                
+                // Scroll to success message
+                document.getElementById('successMessage').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+            }, 2000);
+        });
+
+        // Initialize form
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            
+            // Add smooth scrolling for apply button
+            document.querySelector('a[href="#apply-now"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('apply-now').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+            });
+        });
+
+        // Add input validation and formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
+            // Format phone number
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 0) {
+                if (value.startsWith('0')) {
+                    value = '+234' + value.substring(1);
+                } else if (!value.startsWith('234')) {
+                    value = '+234' + value;
+                }
+            }
+            e.target.value = value.substring(0, 14); // Limit to Nigerian phone format
+        });
+
+        document.getElementById('emergencyPhone').addEventListener('input', function(e) {
+            // Format emergency phone number
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 0) {
+                if (value.startsWith('0')) {
+                    value = '+234' + value.substring(1);
+                } else if (!value.startsWith('234')) {
+                    value = '+234' + value;
+                }
+            }
+            e.target.value = value.substring(0, 14);
+        });
+
+        // Email validation
+        document.getElementById('email').addEventListener('blur', function(e) {
+            const email = e.target.value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email && !emailRegex.test(email)) {
+                e.target.style.borderColor = '#ef4444';
+                alert('Please enter a valid email address');
+            } else {
+                e.target.style.borderColor = '#e2e8f0';
+            }
+        });
+    </script>
+</body>
+</html>
