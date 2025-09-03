@@ -37,8 +37,18 @@
         }
 
         .logo {
-            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
             font-weight: bold;
+            color: white;
+        }
+
+        .logo Img {
+            height: 40px;
+            width: auto;
+            margin-right: 10px;
+            vertical-align: middle;
         }
 
         nav ul {
@@ -555,7 +565,10 @@
 <body>
     <header>
         <div class="nav-container">
-            <div class="logo">Karl Kümm University</div>
+             <div class="logo">
+                <img src="KKU Logo.jpeg" alt="Karl Kumm University Logo" id="logoImg">
+                Karl Kümm University
+            </div>
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
